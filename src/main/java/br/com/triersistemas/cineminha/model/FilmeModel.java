@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import br.com.triersistemas.cineminha.storage.SalvaDados;
+
 public class FilmeModel {
 
 	private EnumNomeFilmeModel nome;
@@ -54,19 +56,10 @@ public class FilmeModel {
 		return valorTotal;
 	}
 
-//	public String[] nomeFilme () {
-//		String[] filmes = {"O presságio", "Interestelar", "Harry Potter", 
-//							"Matilda", "O chamado", "Jogos Mortais"};
-//		if (super.getNome().equals(EnumNomeFilmeModel.PRESSAGIO)) {
-//			return filmes[0];
-//		}
-//	}
-
 	public Integer calcularIdade() {
 		LocalDate hoje = LocalDate.now();
 		LocalDate nasc = this.dataNascimento;
 		Integer idade = 0;
-		Boolean maioridade = false;
 		if (nasc.getMonthValue() < hoje.getMonthValue()
 				|| (nasc.getMonthValue() == hoje.getMonthValue() && nasc.getDayOfMonth() <= hoje.getDayOfMonth())) {
 			idade = hoje.getYear() - nasc.getYear();
@@ -74,5 +67,20 @@ public class FilmeModel {
 			idade = (hoje.getYear() - nasc.getYear()) - 1;
 		}
 		return idade;
+	}
+	
+	public void addFilmes () {
+		CaracteristicasFilmesModel a = new CaracteristicasFilmesModel(EnumNomeFilmeModel.PRESSAGIO, EnumClassificacaoFilmeModel.MAIOR_DE_IDADE);
+		SalvaDados.filmes.add(a);
+		CaracteristicasFilmesModel b = new CaracteristicasFilmesModel(EnumNomeFilmeModel.ANNABELLE, EnumClassificacaoFilmeModel.MAIOR_DE_IDADE);
+		SalvaDados.filmes.add(b);
+		CaracteristicasFilmesModel c = new CaracteristicasFilmesModel(EnumNomeFilmeModel.FRAGMENTADO, EnumClassificacaoFilmeModel.MAIOR_DE_IDADE);
+		SalvaDados.filmes.add(c);
+		CaracteristicasFilmesModel d = new CaracteristicasFilmesModel(EnumNomeFilmeModel.MATILDA, EnumClassificacaoFilmeModel.MENOR_DE_IDADE);
+		SalvaDados.filmes.add(d);
+		CaracteristicasFilmesModel e = new CaracteristicasFilmesModel(EnumNomeFilmeModel.GARFIELD, EnumClassificacaoFilmeModel.MENOR_DE_IDADE);
+		SalvaDados.filmes.add(e);
+		CaracteristicasFilmesModel f = new CaracteristicasFilmesModel(EnumNomeFilmeModel.INTERESTELAR, EnumClassificacaoFilmeModel.MENOR_DE_IDADE);
+		SalvaDados.filmes.add(f);
 	}
 }
